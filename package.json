@@ -1,0 +1,13 @@
+{
+  "name": "DoorAnsweringMachine",
+  "version": "0.0.1",
+  "dependencies": {
+    "express": "4.x.x",
+    "body-parser": "*",
+    "jade": "*"
+  },
+  "engines": {
+    "node": "0.10.x",
+    "npm": "1.1.x"
+  }
+}
