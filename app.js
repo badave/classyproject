@@ -12,9 +12,9 @@ app.use(express.static(__dirname + '/public'));
 app.use(bodyParser());
 
 app.get('/', function(req, res) {
-  res.render("index", {
-    config: config
-  });
+    res.render("index", {
+        config: config
+    });
 });
 
 app.listen(port);
