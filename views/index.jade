@@ -1,10 +1,6 @@
-doctype html
-html(lang="en")
-  head
-    title= config.title
-  body
-    h1= config.title
-    div.
-      HELLO MY NAME IS ARLA
+extends layout
 
-    div HELLO MY NAME IS ARLA
+block body
+  h1= config.title
+  a(href="/register") Register
+  span.glyphicon.glyphicon-play

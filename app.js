@@ -11,10 +11,17 @@ app.set('view engine', 'jade');
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser());
 
+app.locals = {
+    config: config
+};
+
 app.get('/', function(req, res) {
-    res.render("index", {
-        config: config
-    });
+    res.render("index");
+});
+
+
+app.get('/register', function(req, res) {
+    res.render("register");
 });
 
 app.listen(port);
