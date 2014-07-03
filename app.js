@@ -2,11 +2,14 @@ var port = process.env['PORT'] || 8888;
 
 var express = require('express');
 var bodyParser = require('body-parser');
-var app = express();
+var path = require('path');
+
 var compression = require('compression');
 var lessMiddleware = require('less-middleware');
 var jadeBrowser = require('jade-browser');
 
+
+var app = express();
 app.engine('jade', require('jade').__express);
 app.set('view engine', 'jade');
 app.use(express.static(__dirname + '/public'));
@@ -20,7 +23,7 @@ app.use(lessMiddleware(path.join(__dirname, 'less'), {
   force: false
 }));
 
-app.use(jadeBrowser('/templates.js', '**', {
+app.use(jadeBrowser('/js/templates.js', '**', {
   root: path.join(__dirname, 'views'),
   noCache: true
 }));

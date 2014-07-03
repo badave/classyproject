@@ -23,6 +23,6 @@ require.config({
 });
 //requiring the scripts in the first argument and then passing the library namespaces into a callback
 //you should be able to console log all of the callback arguments
-require(['jquery', 'underscore', 'backbone', 'app'], function(jquery, _, Backbone, App) {
+require(['jquery', 'underscore', 'backbone', 'app', 'templates'], function(jquery, _, Backbone, App) {
   new App;
 });
