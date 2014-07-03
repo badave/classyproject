@@ -3,12 +3,9 @@
   "version": "0.0.1",
   "dependencies": {
     "body-parser": "^1.4.3",
-    "bookshelf": "^0.7.6",
     "bootie": "^0.2.31",
     "compression": "^1.0.8",
     "express": "4.x.x",
-    "knex": "^0.6.20",
-    "pg": "^3.3.0",
     "underscore": "^1.6.0"
   },
   "engines": {
