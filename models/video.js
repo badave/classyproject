@@ -1,7 +1,9 @@
-var Renderer = require('../renderers/video');
+var Base = require('./base');
 
-module.exports = Bookshelf.Model.extend({
-  tableName: 'videos',
+module.exports = Base.extend({
+  urlRoot: "videos",
 
-  renderer:
+  schema: {
+
+  }
 });

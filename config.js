@@ -1,19 +1,25 @@
 var environment = process.env['NODE_ENV'] || "development";
-var config = {};
+var fs = require('fs');
+var path = require('path');
 
+var config = module.exports = {
+  proc: 'APP',
+  pid: process.pid,
+  env: environment,
+  cachebust: (new Date()).getTime() // timestamp when process was started
+};
 
 config.title = "Pornodora";
 
+config.database = {
+  "mongodbs": {
+    "primary": "mongodb://localhost:27017/test",
+    "secondary": "mongodb://localhost:27017/test"
+  }
+};
 
 if (environment === "development") {
   config.title = "Classy Project";
 }
-
-config.postgres = {
-  'brown': process.env['HEROKU_POSTGRESQL_BROWN_URL'] || "postgres://cqtiyunqokypgt:qL5IL8x-6qUZYLNBk-wKH3jdQh@ec2-54-204-24-202.compute-1.amazonaws.com:5432/d4lg9dvukip17n?ssl=true"
-};
-
-
-
 
 module.exports = config;

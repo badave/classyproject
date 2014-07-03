@@ -5,33 +5,37 @@ var bodyParser = require('body-parser');
 var app = express();
 var compression = require('compression');
 
-
-var _ = global._ = require('underscore');
-var config = global.config = require('./config');
-var Bookshelf = global.Bookshelf = require('./bookshelf');
-var Bootie = global.Bootie = require('bootie');
-
-var VideoController = require('./controllers/video');
-
 app.engine('jade', require('jade').__express);
 app.set('view engine', 'jade');
-
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser());
 app.use(compression());
+
+
+var _ = global._ = require('underscore');
+
+
+var config = global.config = require('./config');
 
 app.locals = {
   config: config
 };
 
+
+var Bootie = global.Bootie = require('bootie');
+var VideoController = require('./controllers/video');
+
+var database = new Bootie.Database(config.database);
+
 var router = new Bootie.Router({
   version: "v1",
   controllers: {
     video: new VideoController({
-      db: Bookshelf.knex
+      db: database.mongodbs.primary
     })
   }
 });
+
 
 app.use(router.url, router);
 
@@ -39,11 +43,6 @@ app.get('/', function(req, res) {
   res.render("index");
 });
 
-
-app.get('/register', function(req, res) {
-  res.render("register");
-});
-
-console.log("Starting server on  port " + port);
+console.log("Starting server on port " + port);
 
 app.listen(port);

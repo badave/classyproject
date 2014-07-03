@@ -1,5 +1,5 @@
 var Video = require('../models/video');
 
-module.exports = Bookshelf.Collection.extend({
+module.exports = Bootie.Collection.extend({
   model: Video
 });
