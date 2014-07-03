@@ -2,9 +2,11 @@
   "name": "ClassyProject",
   "version": "0.0.1",
   "dependencies": {
+    "body-parser": "^1.4.3",
+    "bootie": "^0.2.31",
+    "compression": "^1.0.8",
     "express": "4.x.x",
-    "body-parser": "*",
-    "jade": "*"
+    "underscore": "^1.6.0"
   },
   "engines": {
     "node": "0.10.x",
