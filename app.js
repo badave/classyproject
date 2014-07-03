@@ -4,12 +4,26 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
 var compression = require('compression');
+var lessMiddleware = require('less-middleware');
+var jadeBrowser = require('jade-browser');
 
 app.engine('jade', require('jade').__express);
 app.set('view engine', 'jade');
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser());
 app.use(compression());
+
+app.use(lessMiddleware(path.join(__dirname, 'less'), {
+  dest: path.join(__dirname, 'public'),
+  compress: true,
+  debug: false,
+  force: false
+}));
+
+app.use(jadeBrowser('/templates.js', '**', {
+  root: path.join(__dirname, 'views'),
+  noCache: true
+}));
 
 
 var _ = global._ = require('underscore');
