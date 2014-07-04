@@ -8,14 +8,19 @@ require.config({
       "libs/jquery/dist/jquery"
     ],
     "underscore": "libs/underscore/underscore",
-    "backbone": "libs/backbone/backbone"
+    "backbone": "libs/backbone/backbone",
+    "woodhouse": "libs/woodhouse/woodhouse"
   },
   shim: {
     "backbone": {
       //loads dependencies first
-      deps: ["jquery", "underscore"],
+      "deps": ["jquery", "underscore"],
       //custom export name, this would be lowercase otherwise
-      exports: "Backbone"
+      "exports": "Backbone"
+    },
+    "woodhouse": {
+      "deps": ["backbone"],
+      "exports": "Woodhouse"
     }
   },
   //how long the it tries to load a script before giving up, the default is 7
@@ -23,6 +28,6 @@ require.config({
 });
 //requiring the scripts in the first argument and then passing the library namespaces into a callback
 //you should be able to console log all of the callback arguments
-require(['jquery', 'underscore', 'backbone', 'app', 'templates'], function(jquery, _, Backbone, App) {
+require(['jquery', 'underscore', 'backbone', 'templates', 'woodhouse', 'app'], function(jquery, _, Backbone, jade, Woodhouse, App) {
   new App;
 });

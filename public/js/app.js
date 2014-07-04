@@ -1,10 +1,18 @@
 define(function(require) {
-  var Backbone = require('backbone');
+  var Woodhouse = require('woodhouse');
 
-  var App = Backbone.View.extend({
+  var App = Woodhouse.Router.extend({
     initialize: function() {
-      console.log("it's working!");
+      Backbone.history.start();
+    },
+    routes: {
+      "": "index",
+      "/": "index"
+    },
+    index: function() {
+      debugger
     }
+
   });
   return App;
 });

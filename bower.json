@@ -5,6 +5,7 @@
     "jquery": "~2.1.1",
     "backbone": null,
     "underscore": null,
-    "requirejs": null
+    "requirejs": null,
+    "woodhouse": "~0.2.15"
   }
 }
