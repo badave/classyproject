@@ -12,12 +12,17 @@ var jadeBrowser = require('jade-browser');
 var app = express();
 app.engine('jade', require('jade').__express);
 app.set('view engine', 'jade');
-app.use(express.static(__dirname + '/public'));
 app.use(bodyParser());
 app.use(compression());
 
 app.use(lessMiddleware(path.join(__dirname, 'less'), {
   dest: path.join(__dirname, 'public'),
+  preprocess: {
+    path: function(pathname, req) {
+      console.log(pathname);
+      return pathname.replace('/css', '');
+    }
+  },
   compress: true,
   debug: false,
   force: false
@@ -53,7 +58,7 @@ var router = new Bootie.Router({
   }
 });
 
-
+app.use(express.static(__dirname + '/public'));
 app.use(router.url, router);
 
 app.get('/', function(req, res) {
