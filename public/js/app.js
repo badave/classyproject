@@ -13,7 +13,17 @@ define(function(require) {
     index: function() {
       var View = Woodhouse.View.extend({
         template: function(context) {
-          return jade.render('home', context);
+          return jade.render('home', {
+          	video: {
+          		id: 1,
+          		title: 'Twerk Fail',
+          		poster: '',
+          		sources: [{
+          			url: '/test/sample-videos/twerk-fail.mp4',
+          			type: 'mp4'
+          		}]
+          	}
+          });
         }
       });
 

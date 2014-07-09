@@ -19,7 +19,6 @@ app.use(lessMiddleware(path.join(__dirname, 'less'), {
   dest: path.join(__dirname, 'public'),
   preprocess: {
     path: function(pathname, req) {
-      console.log(pathname);
       return pathname.replace('/css', '');
     }
   },
