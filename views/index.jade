@@ -2,3 +2,15 @@ extends layout
 
 block body
 	div.container
+
+block append body
+	script.
+		window.first_video = {
+			"id": "1",
+			"title": "Twerk Fail",
+			"poster": "",
+			"sources": [{
+				"url": "/test/sample-videos/twerk-fail.mp4",
+				"type": "mp4"
+			}]
+		};

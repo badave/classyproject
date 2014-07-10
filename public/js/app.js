@@ -1,6 +1,6 @@
 define(function(require) {
   var Woodhouse = require('woodhouse');
-  // var Video = require('')
+  var Videos = require('./collections/video');
 
   var App = Woodhouse.Router.extend({
     initialize: function() {
@@ -11,23 +11,22 @@ define(function(require) {
       "/": "index"
     },
     index: function() {
-      var View = Woodhouse.View.extend({
-        template: function(context) {
-          return jade.render('home', {
-          	video: {
-          		id: 1,
-          		title: 'Twerk Fail',
-          		poster: '',
-          		sources: [{
-          			url: '/test/sample-videos/twerk-fail.mp4',
-          			type: 'mp4'
-          		}]
-          	}
-          });
-        }
-      });
+      var videos = new Videos();
+      videos.fetch({
+        success: function() {
+          var video = videos.first() || {};
 
-      $('.container').html(new View().render().$el);
+          var View = Woodhouse.View.extend({
+            template: function(context) {
+              return jade.render('home', context);
+            }
+          });
+
+          $('.container').html(new View({
+            model: video
+          }).render().$el);
+        }
+      })
     }
 
   });
