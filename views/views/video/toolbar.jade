@@ -1,0 +1,13 @@
+nav.toolbar
+	ul.nav.nav-justified
+		li(bind-attr-class="dislike")
+			i.fa.fa-thumbs-o-down(bind-click="dislike")
+		li(bind-attr-class="like")
+			i.fa.fa-thumbs-o-up(bind-click="like",)
+		li
+			span.fa.fa-pause(bind-click="pause",bind-visible="playing") 
+			span.fa.fa-play(bind-click="play",bind-hidden="playing")
+		li
+			span.fa.fa-fast-forward(bind-click="next")
+		li
+			span.fa.fa-heart-o(bind-click="save")
