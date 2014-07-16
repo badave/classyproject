@@ -7,9 +7,11 @@ require.config({
       "https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min",
       "libs/jquery/dist/jquery"
     ],
+    "videojs": "libs/video-js/video",
     "underscore": "libs/underscore/underscore",
     "backbone": "libs/backbone/backbone",
-    "woodhouse": "libs/woodhouse/woodhouse"
+    "woodhouse": "libs/woodhouse/woodhouse",
+    "bootstrap": "lib/bootstrap/bootstrap"
   },
   shim: {
     "backbone": {
@@ -28,6 +30,13 @@ require.config({
 });
 //requiring the scripts in the first argument and then passing the library namespaces into a callback
 //you should be able to console log all of the callback arguments
-require(['jquery', 'underscore', 'backbone', 'templates', 'woodhouse', 'app'], function(jquery, _, Backbone, jade, Woodhouse, App) {
-  new App;
+require([
+  'jquery', 
+  'underscore', 
+  'backbone', 
+  'templates', 
+  'woodhouse', 
+  'app'
+  ], function(jquery, _, Backbone, jade, Woodhouse, App) {
+    new App;
 });

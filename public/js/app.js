@@ -1,6 +1,7 @@
 define(function(require) {
   var Woodhouse = require('woodhouse');
   var Videos = require('./collections/video');
+  var HomeView = require('./views/home/home');
 
   var App = Woodhouse.Router.extend({
     initialize: function() {
@@ -14,16 +15,8 @@ define(function(require) {
       var videos = new Videos();
       videos.fetch({
         success: function() {
-          var video = videos.first() || {};
-
-          var View = Woodhouse.View.extend({
-            template: function(context) {
-              return jade.render('home', context);
-            }
-          });
-
-          $('.container').html(new View({
-            model: video
+          $('.container').html(new HomeView({
+            collection: videos
           }).render().$el);
         }
       })

@@ -1,10 +1,13 @@
 nav.toolbar
 	ul.nav.nav-justified
+		li(bind-attr-class="dislike")
+			i.fa.fa-thumbs-o-down(bind-click="dislike")
+		li(bind-attr-class="like")
+			i.fa.fa-thumbs-o-up(bind-click="like",)
 		li
-			i.fa.fa-thumbs-o-down
+			span.fa.fa-pause(bind-click="pause",bind-visible="playing") 
+			span.fa.fa-play(bind-click="play",bind-hidden="playing")
 		li
-			i.fa.fa-thumbs-o-up
+			span.fa.fa-fast-forward(bind-click="next")
 		li
-			span.fa.fa-play
-		li
-			span.fa.fa-fast-forward
+			span.fa.fa-heart-o(bind-click="save")

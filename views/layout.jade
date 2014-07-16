@@ -1,7 +1,7 @@
 doctype html
 html(lang="en")
   head
-    title= config.title
+    title=config.title
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
@@ -10,8 +10,9 @@ html(lang="en")
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
+    link(rel='stylesheet', href='/js/libs/video-js/video-js.css')
     link(rel='stylesheet', href='/css/main.css')
 
-    <script data-main="js/main" src="js/libs/requirejs/require.js"></script>
+    <script data-main="js/main" src="/js/libs/requirejs/require.js"></script>
   body
     block body
