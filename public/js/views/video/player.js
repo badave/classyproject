@@ -26,6 +26,8 @@ define(function(require) {
 					video.on('pause', function() {
 						self.model.set('playing', false);
 					});
+
+					self.play();
 				});
 			}.bind(this));
 		},
@@ -58,31 +60,43 @@ define(function(require) {
 			}.bind(this))
 		},
 
-		next: function() {
-			this.collection.shift();
-			this.model = this.collection.first();
+		toggle: function() {
+			if(this.model.get('playing')) {
+				this.pause();
+			} else {
+				this.play();
+			}
+		},
 
-			this.render();
+		next: function() {
+			if(this.collection.length > 1) {
+				this.collection.shift();
+				this.model = this.collection.first();
+				this.render();
+			}
 		},
 
 		like: function() {
-			this.model.set('like', true);
-			this.model.set('dislike', false);
+			this.model.set('like', 'liked');
+			this.model.set('dislike', '');
 		},
 
 		dislike: function() {
-			this.model.set('like', false);
-			this.model.set('dislike', true);
+			this.model.set('like', '');
+			this.model.set('dislike', 'disliked');
 		},
 
 		save: function() {
-
+			this.model.set('saved', 'saved');
 		},
 
 		bindKeyboardEvents: function() {
 			$('body').keydown(function(e) {
 				if(e.which === 39) { // RIGHT ARROW
 					this.next();
+				}
+				if(e.which === 32) {
+					this.toggle();
 				}
 			}.bind(this));
 		}
