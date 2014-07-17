@@ -1,6 +1,7 @@
-video.video-js.vjs-default-skin(id="video_#{model._id}",controls,preload="auto",width="100%",height="450",poster="#{model.poster}")
-	-each source in model.sources
-		source(src="#{source.url}",type='video/#{source.type}')
-	p.vjs-no-js To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+-if(model)
+	video.video-js.vjs-default-skin(id="video_#{model._id}",controls,preload="auto",width="100%",height="450",poster="#{model.poster}")
+		-each source in model.sources
+			source(src="#{source.url}",type='video/#{source.type}')
+		p.vjs-no-js To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
 
-h2(style="text-align:center")=model.title
+	h2(style="text-align:center")=model.title
