@@ -5,7 +5,7 @@ define(function(require) {
 	return Woodhouse.View.extend({
 		initialize: function() {
 			this.model = this.collection.first();
-			this.model.set('playing', false);
+			this.model.set('playing', true);
 			this.template.bind(this);
 
 			this.bindKeyboardEvents();
@@ -19,6 +19,8 @@ define(function(require) {
 			var self = this;
 			setTimeout(function() {
 				self.video(function(video) {
+					self.play();
+					
 					video.on('play', function() {
 						self.model.set('playing', true);
 					});
@@ -26,8 +28,6 @@ define(function(require) {
 					video.on('pause', function() {
 						self.model.set('playing', false);
 					});
-
-					self.play();
 				});
 			}.bind(this));
 		},
