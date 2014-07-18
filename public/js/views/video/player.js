@@ -1,6 +1,7 @@
 define(function(require) {
 	var Woodhouse = require('woodhouse');
 	var videojs = require('videojs');
+	var HEIGHT_PERCENT = 0.75;
 
 	return Woodhouse.View.extend({
 		initialize: function() {
@@ -8,11 +9,12 @@ define(function(require) {
 			this.model.set('playing', true);
 			this.template.bind(this);
 
+			this.bindWindowEvents();
 			this.bindKeyboardEvents();
 		},
 
 		template: function(context) {
-			var height = $(window).height() * 0.75;
+			var height = $(window).height() * HEIGHT_PERCENT;
 			return jade.render('video/player', _.extend(context, {
 				height: height + "px"
 			}));
@@ -110,13 +112,12 @@ define(function(require) {
 		},
 
 		onWindowResize: function(e) {
-			var height = $(window).height() * 0.75;
-			this.model.set('height', height + "px");
+			var height = $(window).height() * HEIGHT_PERCENT;
+			this.video.height(height + "px");
 		},
 
 		bindWindowEvents: function() {
 			// call to set height
-			this.onWindowResize();
 			$(window).resize(this.onWindowResize.bind(this));
 		}
 	});
