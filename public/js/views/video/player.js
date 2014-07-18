@@ -14,16 +14,15 @@ define(function(require) {
 		},
 
 		template: function(context) {
-			var height = $(window).height() * HEIGHT_PERCENT;
-			return jade.render('video/player', _.extend(context, {
-				height: height + "px"
-			}));
+			return jade.render('video/player', context);
 		},
 
 		onRender: function() {
 			setTimeout(function() {
 				this.prepareVideo(function(video) {
 					this.video = video;
+
+					this.video.height(this.videoHeight());
 					this.play();
 					this.bindVideoEvents(video);
 				}.bind(this));
@@ -111,9 +110,12 @@ define(function(require) {
 			});
 		},
 
+		videoHeight: function() {
+			return $(window).height() * HEIGHT_PERCENT + "px";
+		},
+
 		onWindowResize: function(e) {
-			var height = $(window).height() * HEIGHT_PERCENT;
-			this.video.height(height + "px");
+			this.video.height(this.videoHeight());
 		},
 
 		bindWindowEvents: function() {

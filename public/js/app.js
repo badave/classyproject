@@ -15,7 +15,7 @@ define(function(require) {
       var videos = new Videos();
       videos.fetch({
         success: function() {
-          $('.container').html(new HomeView({
+          $('body').html(new HomeView({
             collection: videos
           }).render().$el);
         }
