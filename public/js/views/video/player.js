@@ -12,28 +12,24 @@ define(function(require) {
 		},
 
 		template: function(context) {
-			return jade.render('video/player', context);
+			var height = $(window).height() * 0.75;
+			return jade.render('video/player', _.extend(context, {
+				height: height + "px"
+			}));
 		},
 
 		onRender: function() {
-			var self = this;
 			setTimeout(function() {
-				self.video(function(video) {
-					self.play();
-					
-					video.on('play', function() {
-						self.model.set('playing', true);
-					});
-
-					video.on('pause', function() {
-						self.model.set('playing', false);
-					});
-				});
+				this.prepareVideo(function(video) {
+					this.video = video;
+					this.play();
+					this.bindVideoEvents(video);
+				}.bind(this));
 			}.bind(this));
 		},
 
 		// Calls back with context of this.callback(video), where this is the view
-		video: function(callback) {
+		prepareVideo: function(callback) {
 			var self;
 			videojs(this.videoId()).ready(function() {
 				if(callback) {
@@ -47,17 +43,13 @@ define(function(require) {
 		},
 		
 		play: function() {
-			this.video(function(video) {
-				video.play();
-				this.model.set('playing', true);
-			}.bind(this));
+			this.video.play();
+			this.model.set('playing', true);
 		},
 
 		pause: function() {
-			this.video(function(video) {
-				video.pause();
-				this.model.set('playing', false);
-			}.bind(this))
+			this.video.pause();
+			this.model.set('playing', false);
 		},
 
 		toggle: function() {
@@ -68,7 +60,7 @@ define(function(require) {
 			}
 		},
 
-		next: function() {
+		next: function() {	
 			if(this.collection.length > 1) {
 				this.collection.shift();
 				this.model = this.collection.first();
@@ -99,6 +91,33 @@ define(function(require) {
 					this.toggle();
 				}
 			}.bind(this));
+		},
+
+		bindVideoEvents: function(video) {
+			var self = this;
+
+			video.on('play', function() {
+				self.model.set('playing', true);
+			});
+
+			video.on('pause', function() {
+				self.model.set('playing', false);
+			});
+
+			video.on('ended', function() {
+				self.next();
+			});
+		},
+
+		onWindowResize: function(e) {
+			var height = $(window).height() * 0.75;
+			this.model.set('height', height + "px");
+		},
+
+		bindWindowEvents: function() {
+			// call to set height
+			this.onWindowResize();
+			$(window).resize(this.onWindowResize.bind(this));
 		}
 	});
 });
