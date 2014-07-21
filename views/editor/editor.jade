@@ -32,7 +32,7 @@ div.editor-modal.modal.fade(tabindex="-1", role="dialog", aria-hidden="true")
               td
                 input(name="tags", bind-val="tags", type="text", value="",bind-attr-data-tags-id="_id")
               td 
-                a.removeVideo(href="javascript:;",data-attr-data-remove-id="_id")
+                a.removeVideo(href="javascript:;",bind-attr-data-remove-id="_id")
                   i.fa.fa-minus
       .modal-footer
         button.btn.btn-default(type="button", data-dismiss="modal") Close
