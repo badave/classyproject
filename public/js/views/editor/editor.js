@@ -19,7 +19,7 @@ define(function(require) {
     	this.$el.find('[name="tags"]').tagsinput();
     },
     addVideo: function(e) {
-        this.collection.add(new Video());
+        this.collection.unshift(new Video());
     },
     save: function(e) {
     	e.stopPropagation();
