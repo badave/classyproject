@@ -2,6 +2,7 @@ define(function(require) {
   var Woodhouse = require('woodhouse');
   var PlayerView = require('../video/player');
   var EditorView = require('../editor/editor');
+  var LoginView = require('../user/login');
 
   // Acts as a layout for multiple backbone views
   return Woodhouse.View.extend({
@@ -14,6 +15,10 @@ define(function(require) {
       }).render().$el);
 
       this.$el.find('.editor').html(new EditorView({
+        collection: this.collection.clone()
+      }).render().$el);
+
+      this.$el.find('.login').html(new LoginView({
         collection: this.collection.clone()
       }).render().$el);
     }
