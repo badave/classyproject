@@ -16,7 +16,7 @@ div.editor-modal.modal.fade(tabindex="-1", role="dialog", aria-hidden="true")
             td URL
             td Description
             td Tags
-            td
+            td(style="width:20px")
               a.addVideo(href="javascript:;")
                 i.fa.fa-plus
           tbody(bind-each="this", bind-each-context="collection")
@@ -31,7 +31,7 @@ div.editor-modal.modal.fade(tabindex="-1", role="dialog", aria-hidden="true")
                 textarea(name="description", bind-val="description", type="text")
               td
                 input(name="tags", bind-val="tags", type="text", value="",bind-attr-data-tags-id="_id")
-              td 
+              td(style="width:20px")
                 a.removeVideo(href="javascript:;",bind-attr-data-id="_id")
                   i.fa.fa-minus
                 &nbsp;
