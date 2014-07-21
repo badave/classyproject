@@ -1,0 +1,37 @@
+<!-- Button trigger modal -->
+i.fa.fa-pencil(bind-click="openModal")
+
+div.editor-modal.modal.fade(tabindex="-1", role="dialog", aria-hidden="true")
+  .modal-dialog.modal-lg
+    .modal-content
+      .modal-header Content Editor
+        button.close(type="button", data-dismiss="modal")
+          span(aria-hidden="true") &times;
+          span.sr-only Close
+      .modal-body
+        table.editor-table
+          thead
+            td Title
+            td Poster
+            td URL
+            td Description
+            td Tags
+            td
+              a.addVideo(href="javascript:;")
+                i.fa.fa-plus
+          tbody(bind-each="this", bind-each-context="collection")
+            tr
+              td
+                input(name="title", bind-val="title", type="text")
+              td
+                input(name="poster", bind-val="poster", type="url")
+              td
+                input(name="url", bind-val="url", type="url")
+              td
+                textarea(name="description", bind-val="description", type="text")
+              td
+                input(name="tags", bind-val="tags", type="text", value="",bind-attr-data-tags-id="_id")
+              td 
+      .modal-footer
+        button.btn.btn-default(type="button", data-dismiss="modal") Close
+        button.btn.btn-primary(type="submit") Save changes

@@ -11,7 +11,9 @@ require.config({
     "underscore": "libs/underscore/underscore",
     "backbone": "libs/backbone/backbone",
     "woodhouse": "libs/woodhouse/woodhouse",
-    "bootstrap": "lib/bootstrap/bootstrap"
+    "bootstrap": "libs/bootstrap/dist/js/bootstrap",
+    "bootstrap-tagsinput": "libs/bootstrap-tagsinput/dist/bootstrap-tagsinput",
+    "videojs-youtube": "libs/videojs-youtube/dist/vjs.youtube"
   },
   shim: {
     "backbone": {
@@ -23,6 +25,15 @@ require.config({
     "woodhouse": {
       "deps": ["backbone"],
       "exports": "Woodhouse"
+    },
+    "bootstrap": {
+      "deps": ["jquery"]
+    },
+    "bootstrap-tagsinput": {
+      "deps": ["bootstrap"]
+    },
+    "videojs-youtube": {
+      "deps": ["videojs"]
     }
   },
   //how long the it tries to load a script before giving up, the default is 7
@@ -36,7 +47,8 @@ require([
   'backbone', 
   'templates', 
   'woodhouse', 
-  'app'
+  'app',
+  'bootstrap'
   ], function(jquery, _, Backbone, jade, Woodhouse, App) {
     new App;
 });

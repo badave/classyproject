@@ -29,5 +29,10 @@ module.exports = Bootie.Model.extend({
       locked: 'boolean',
       version: 'string'
     };
-  }
+  },
+
+  readOnlyAttributes: {
+    '_id': 'string',
+    'user_id': 'string'
+  },
 });

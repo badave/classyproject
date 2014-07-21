@@ -1,6 +1,8 @@
 define(function(require) {
 	var Woodhouse = require('woodhouse');
 	var videojs = require('videojs');
+	require('videojs-youtube');
+
 	var HEIGHT_PERCENT = 0.75;
 
 	return Woodhouse.View.extend({
@@ -32,7 +34,9 @@ define(function(require) {
 		// Calls back with context of this.callback(video), where this is the view
 		prepareVideo: function(callback) {
 			var self;
-			videojs(this.videoId()).ready(function() {
+
+			videojs(this.videoId(), 
+				this.videoSetup()).ready(function() {
 				if(callback) {
 					callback.call(self, this);
 				}
@@ -41,6 +45,18 @@ define(function(require) {
 		
 		videoId: function() {
 			return 'video_' + this.model.id;
+		},
+
+		videoSetup: function() {
+			var obj = {
+				"src": this.model.get('url')
+			};
+
+			if(this.model.get('url').indexOf('youtube') >= 0) {
+				obj['techOrder'] = ['youtube'];
+			}
+
+			return obj;
 		},
 		
 		play: function() {
@@ -115,7 +131,9 @@ define(function(require) {
 		},
 
 		onWindowResize: function(e) {
-			this.video.height(this.videoHeight());
+			if(this.video) {
+				this.video.height(this.videoHeight());
+			}
 		},
 
 		bindWindowEvents: function() {
