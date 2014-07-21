@@ -1,0 +1,21 @@
+<!-- Button trigger modal -->
+i.fa.fa-sign-in(bind-click="openModal")
+
+div.login-modal.modal.fade(tabindex="-1", role="dialog", aria-hidden="true", role="form")
+  .modal-dialog.modal-sm
+    .modal-content
+      .modal-header Register or Login
+        button.close(type="button", data-dismiss="modal")
+          span(aria-hidden="true") &times;
+          span.sr-only Close
+        .modal-body
+          div.form-group
+            label(for="email") Email
+            input#email.form-control(type="email",bind-val="email")
+          div.form-group
+            label(for="password") Password
+            input#password.form-control(type="password",bind-val="password")
+
+      .modal-footer
+        button.btn.btn-default(type="button", data-dismiss="modal") Cancel
+        button.btn.btn-primary(type="submit") Let Me In
