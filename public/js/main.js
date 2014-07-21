@@ -13,7 +13,7 @@ require.config({
     "woodhouse": "libs/woodhouse/woodhouse",
     "bootstrap": "libs/bootstrap/dist/js/bootstrap",
     "bootstrap-tagsinput": "libs/bootstrap-tagsinput/dist/bootstrap-tagsinput",
-    "videojs-youtube": "libs/videojs-youtube/dist/vjs.youtube"
+    "videojs-youtube": "libs/videojs-youtube/src/youtube"
   },
   shim: {
     "backbone": {
