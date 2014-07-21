@@ -14,13 +14,19 @@ define(function(require) {
         collection: this.collection
       }).render().$el);
 
+    },
+    openEditorModal: function() {
       this.$el.find('.editor').html(new EditorView({
         collection: this.collection.clone()
       }).render().$el);
 
-      this.$el.find('.login').html(new LoginView({
-        collection: this.collection.clone()
-      }).render().$el);
+
+      this.$el.find('.editor-modal').modal('show');
+    },
+    openLoginModal: function() {
+      this.$el.find('.login').html(new LoginView().render().$el);
+      this.$el.find('.login-modal').modal('show');
     }
+
   });
 })

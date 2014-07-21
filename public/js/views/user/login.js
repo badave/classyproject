@@ -13,9 +13,6 @@ define(function(require) {
     },
     template: function(context) {
       return jade.render('user/login', context);
-    },
-    openModal: function() {
-      this.$el.find('.modal').modal('show');
     }
   });
 });

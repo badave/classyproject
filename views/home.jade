@@ -1,8 +1,13 @@
 header
 	.container
 		nav.header-menu
-			.login
-			.editor
-
+			a.login_button(bind-click="openLoginModal")
+				i.fa.fa-sign-in
+			a.editor_button(bind-click="openEditorModal")
+				i.fa.fa-pencil
 
 .player-container
+
+.login
+.editor
+

@@ -14,10 +14,6 @@ define(function(require) {
 		template: function(context) {
       return jade.render('editor/editor', context);
     },
-    openModal: function() {
-    	this.$el.find('.modal').modal('show');
-    },
-
     onRender: function() {
     	this.$el.find('[name="tags"]').tagsinput();
     },
