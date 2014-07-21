@@ -12,7 +12,7 @@ div.editor-modal.modal.fade(tabindex="-1", role="dialog", aria-hidden="true")
         table.editor-table
           thead
             td Title
-            td Poster
+            //- td Poster
             td URL
             td Description
             td Tags
@@ -24,16 +24,19 @@ div.editor-modal.modal.fade(tabindex="-1", role="dialog", aria-hidden="true")
               td
                 input(name="title", bind-val="title", type="text")
               td
-                input(name="poster", bind-val="poster", type="url")
-              td
-                input(name="url", bind-val="url", type="url")
+                input(name="url", bind-val="url", type="url", required)
+              //- td
+                //- input(name="poster", bind-val="poster", type="url")
               td
                 textarea(name="description", bind-val="description", type="text")
               td
                 input(name="tags", bind-val="tags", type="text", value="",bind-attr-data-tags-id="_id")
               td 
-                a.removeVideo(href="javascript:;",bind-attr-data-remove-id="_id")
+                a.removeVideo(href="javascript:;",bind-attr-data-id="_id")
                   i.fa.fa-minus
+                &nbsp;
+                a.playVideo(href="javascript:;",bind-attr-data-id="_id")
+                  i.fa.fa-play
       .modal-footer
         button.btn.btn-default(type="button", data-dismiss="modal") Close
         button.btn.btn-primary(type="submit") Save changes

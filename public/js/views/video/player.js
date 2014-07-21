@@ -1,6 +1,7 @@
 define(function(require) {
 	var Woodhouse = require('woodhouse');
 	var videojs = require('videojs');
+	var Video = require('../../models/video');
 	require('videojs-youtube');
 
 	var HEIGHT_PERCENT = 0.75;
@@ -139,6 +140,11 @@ define(function(require) {
 		bindWindowEvents: function() {
 			// call to set height
 			$(window).resize(this.onWindowResize.bind(this));
+
+			$(window).on('load:video', function(e, model) {
+				this.model = model;
+				this.render();
+			}.bind(this));
 		}
 	});
 });

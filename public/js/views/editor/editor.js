@@ -7,6 +7,7 @@ define(function(require) {
 		tagName: 'form',
 		events: {
             'click .addVideo': 'addVideo',
+            'click .playVideo': 'playVideo',
             'click .removeVideo': 'removeVideo',
 			'submit': 'save'
 		},
@@ -16,14 +17,23 @@ define(function(require) {
     openModal: function() {
     	this.$el.find('.modal').modal('show');
     },
+
     onRender: function() {
     	this.$el.find('[name="tags"]').tagsinput();
     },
     addVideo: function(e) {
         this.collection.unshift(new Video());
     },
+    playVideo: function(e) {
+        // Player listens for this event on the collection
+        var target_id = $(e.currentTarget).attr('data-id');
+        var model = this.collection.findWhere({
+            '_id': target_id
+        });
+        $(window).trigger('load:video', model);
+    },
     removeVideo: function(e) {
-        var target_id = $(e.currentTarget).attr('data-remove-id');
+        var target_id = $(e.currentTarget).attr('data-id');
         var model = this.collection.findWhere({
             '_id': target_id
         });
