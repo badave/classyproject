@@ -46,6 +46,7 @@ define(function(require) {
 
     	this.collection.each(function(model) {
     		var tags = this.$el.find('[data-tags-id="' + model.id + '"]').val();
+
     		model.set('tags', (tags || '').split(','));
     		if(!_.isEmpty(model.changed)) {
     			model.save();

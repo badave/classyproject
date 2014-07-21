@@ -7,8 +7,7 @@ module.exports = Base.extend({
   	'title': 'string',
   	'url': 'string',
   	'poster': 'string',
-  	'tags': 'string',
+  	'tags': 'array',
   	'description': 'string'
-
   }
 });
