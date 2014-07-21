@@ -27,6 +27,5 @@ define(function(require) {
       this.$el.find('.login').html(new LoginView().render().$el);
       this.$el.find('.login-modal').modal('show');
     }
-
   });
 })

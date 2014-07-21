@@ -16,6 +16,12 @@ define(function(require) {
 			this.bindKeyboardEvents();
 		},
 
+		templateContext: function() {
+			return _.extend(Woodhouse.View.prototype.templateContext.apply(this, arguments), {
+				'height': this.videoHeight() 
+			});
+		},
+
 		template: function(context) {
 			return jade.render('video/player', context);
 		},
@@ -24,7 +30,6 @@ define(function(require) {
 			setTimeout(function() {
 				this.prepareVideo(function(video) {
 					this.video = video;
-
 					this.video.height(this.videoHeight());
 					this.play();
 					this.bindVideoEvents(video);
