@@ -11,15 +11,15 @@ define(function(require) {
     },
     onRender: function() {
       this.$el.find('.player-container').html(new PlayerView({
-        collection: this.collection
+        collection: this.collection.clone(),
+        paging: this.collection.paging
       }).render().$el);
-
     },
     openEditorModal: function() {
       this.$el.find('.editor').html(new EditorView({
-        collection: this.collection.clone()
+        collection: this.collection.clone(),
+        paging: this.collection.paging
       }).render().$el);
-
 
       this.$el.find('.editor-modal').modal('show');
     },

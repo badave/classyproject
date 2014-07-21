@@ -150,6 +150,10 @@ define(function(require) {
 				this.model = model;
 				this.render();
 			}.bind(this));
+
+			$(window).on('pause:video', function(e) {
+				this.pause();
+			}.bind(this));
 		}
 	});
 });

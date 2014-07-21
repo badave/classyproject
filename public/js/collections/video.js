@@ -1,16 +1,9 @@
 define(function(require) {
-	var Woodhouse = require('woodhouse');
+	var Base = require('./base');
 	var Video = require('../models/video');
 
-	return Woodhouse.Collection.extend({
+	return Base.extend({
 		urlRoot: "/v1/videos",
-		url: function() {
-			return this.urlRoot;
-		},
-
-		parse: function(response) {
-			return response.data;
-		},
 
 		model: Video
 	});
