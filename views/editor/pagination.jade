@@ -1,7 +1,7 @@
 //- {total: 11, count: 5, limit: 5, offset: 0, has_more: true}
 .pages
 	- for(var i = 0; i < pages; i++) {
-			-if(i !== current_page - 1)
+			-if(i !== current_page)
 				a.page(bind-click="goToPage",data-page="#{i}",href="javascript:;")
 					span=i+1
 			-else

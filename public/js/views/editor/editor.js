@@ -18,7 +18,7 @@ define(function(require) {
     templateContext: function() {
       return _.extend(Woodhouse.View.prototype.templateContext.apply(this, arguments), {
         pages: Math.ceil(this.paging.total / (this.paging.limit > 0 ? this.paging.limit: 1)),
-        current_page: Math.floor(this.paging.offset / (this.paging.total > 0 ? this.paging.total: 1) ) + 1
+        current_page: Math.floor(this.paging.offset / (this.paging.total > 0 ? this.paging.total: 1) )
       });
     },
     template: function(context) {

@@ -8,11 +8,12 @@ div.login-modal.modal.fade(tabindex="-1", role="dialog", aria-hidden="true", rol
         .modal-body
           div.form-group
             label(for="email") Email
-            input#email.form-control(type="email",bind-val="email")
+            input#email.form-control(type="email",bind-val="email",placeholder="Email")
           div.form-group
             label(for="password") Password
-            input#password.form-control(type="password",bind-val="password")
+            input#password.form-control(type="password",bind-val="password",placeholder="Password")
 
       .modal-footer
+        a(href="javascript:;") iForgot
         button.btn.btn-default(type="button", data-dismiss="modal") Cancel
         button.btn.btn-primary(type="submit") Let Me In

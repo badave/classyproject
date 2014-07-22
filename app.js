@@ -45,12 +45,16 @@ app.locals = {
 
 var Bootie = global.Bootie = require('bootie');
 var VideoController = require('./controllers/video');
+var UserController = require('./controllers/user');
 
 var database = new Bootie.Database(config.database);
 
 var router = new Bootie.Router({
   version: "v1",
   controllers: {
+    user: new UserController({
+      db: database.mongodbs.primary
+    }),
     video: new VideoController({
       db: database.mongodbs.primary
     })
