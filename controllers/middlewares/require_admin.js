@@ -2,7 +2,8 @@
 
 module.exports = function(req, res, next) {
   var err;
-  if (!req.admin) {
+
+  if (!req.user || !req.user.admin()) {
     err = new Error("Admin required.");
     err.code = 401;
   }

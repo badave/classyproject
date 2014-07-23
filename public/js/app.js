@@ -21,7 +21,7 @@ define(function(require) {
         }
       })
     }
-
   });
+
   return App;
 });

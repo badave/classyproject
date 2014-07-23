@@ -1,6 +1,8 @@
 define(function(require) {
 	var Woodhouse = require('woodhouse');
 	var videojs = require('videojs');
+
+	var APP = require('../../constants');
 	var Video = require('../../models/video');
 	require('videojs-youtube');
 
@@ -9,6 +11,11 @@ define(function(require) {
 	return Woodhouse.View.extend({
 		initialize: function() {
 			this.model = this.collection.first();
+
+			if(!this.model) {
+				this.model = new Video();
+			}
+
 			this.model.set('playing', true);
 			this.template.bind(this);
 
@@ -58,7 +65,7 @@ define(function(require) {
 				"src": this.model.get('url')
 			};
 
-			if(this.model.get('url').indexOf('youtube') >= 0) {
+			if(this.model.get('url') && this.model.get('url').indexOf('youtube') >= 0) {
 				obj['techOrder'] = ['youtube'];
 			}
 
@@ -146,12 +153,12 @@ define(function(require) {
 			// call to set height
 			$(window).resize(this.onWindowResize.bind(this));
 
-			$(window).on('load:video', function(e, model) {
+			$(window).on(APP.EVENTS.LOAD_VIDEO, function(e, model) {
 				this.model = model;
 				this.render();
 			}.bind(this));
 
-			$(window).on('pause:video', function(e) {
+			$(window).on(APP.EVENTS.PAUSE_VIDEO, function(e) {
 				this.pause();
 			}.bind(this));
 		}

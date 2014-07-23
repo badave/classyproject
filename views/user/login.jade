@@ -6,12 +6,17 @@ div.login-modal.modal.fade(tabindex="-1", role="dialog", aria-hidden="true", rol
           span(aria-hidden="true") &times;
           span.sr-only Close
         .modal-body
-          div.form-group
+          div.form-group.email-group
             label(for="email") Email
-            input#email.form-control(type="email",bind-val="email",placeholder="Email")
-          div.form-group
+            input#email.form-control.has-feedback(type="email",bind-val="email",placeholder="Email")
+          div.form-group.password-group
             label(for="password") Password
             input#password.form-control(type="password",bind-val="password",placeholder="Password")
+          div.form-group
+            input#remember-me.form-control(type="checkbox",bind-checked="remember")
+            label(for="remember-me") Remember Me
+
+          div.error(style="display:none;")
 
       .modal-footer
         a(href="javascript:;") iForgot

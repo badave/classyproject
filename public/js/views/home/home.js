@@ -26,6 +26,7 @@ define(function(require) {
     openLoginModal: function() {
       this.$el.find('.login').html(new LoginView().render().$el);
       this.$el.find('.login-modal').modal('show');
-    }
+    },
+
   });
 })

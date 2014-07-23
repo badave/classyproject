@@ -3,17 +3,16 @@
 var Bootie = require('bootie');
 
 module.exports = Bootie.Model.extend({
+  idAttribute: "_id",
+
+  db: Bootie.database.mongodbs.primary,
+
   baseDefaults: function() {
     return {
       _id: null,
       user_id: null,
-      created: (new Date()).getTime(),
-      updated: (new Date()).getTime(),
       created_date: new Date(),
-      updated_date: new Date(),
-      metadata: {},
-      locked: false,
-      version: 'v1'
+      updated_date: new Date()
     };
   },
 
@@ -21,13 +20,8 @@ module.exports = Bootie.Model.extend({
     return {
       _id: 'string',
       user_id: 'string',
-      created: 'integer',
-      updated: 'integer',
       created_date: 'date',
-      updated_date: 'date',
-      metadata: 'object',
-      locked: 'boolean',
-      version: 'string'
+      updated_date: 'date'
     };
   },
 

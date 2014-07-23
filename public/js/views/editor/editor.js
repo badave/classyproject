@@ -1,6 +1,7 @@
 define(function(require) {
   var Woodhouse = require('woodhouse');
   var Video = require('../../models/video');
+  var APP = require('../../constants');
   require('bootstrap-tagsinput');
 
   return Woodhouse.View.extend({
@@ -36,7 +37,7 @@ define(function(require) {
       var model = this.collection.findWhere({
         '_id': target_id
       });
-      $(window).trigger('load:video', model);
+      $(window).trigger(APP.EVENTS.LOAD_VIDEO, model);
     },
     removeVideo: function(e) {
       var target_id = $(e.currentTarget).attr('data-id');
