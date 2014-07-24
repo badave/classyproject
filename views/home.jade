@@ -1,17 +1,19 @@
 header
 	.container
 		nav.header-menu
-			-if(!user._id)
-				a.login_button(bind-click="openLoginModal")
-					i.fa.fa-sign-in
+			-if(user)
+				span=user.email.split("@")[0]
 				a.editor_button(bind-click="openEditorModal")
 					i.fa.fa-pencil
+				a.logout_button(bind-click="logout")
+					i.fa.fa-sign-out
 			-else
-				span=user.email.split("@")[0]
+				a.login_button(bind-click="openLoginModal")
+					i.fa.fa-sign-in
 
 .player-container
 
--if(!user._id)
-	.login
+-if(user)
 	.editor
-
+-else 
+	.login

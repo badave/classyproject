@@ -24,9 +24,9 @@ define(function(require) {
 
       this.model.save({}, {
         success: function(model) {
-          $(window).trigger(APP.EVENTS.USER_LOGIN, model);
           APP.user = model;
           this.$el.find('.login-modal').modal('hide');
+          $(window).trigger(APP.EVENTS.USER_LOGIN, model);
         }.bind(this),
         error: function(model, response) {
           var error = response.responseJSON.data;

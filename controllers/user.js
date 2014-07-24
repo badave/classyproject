@@ -14,6 +14,16 @@ module.exports = BaseCrudController.extend({
 
   debug: false,
 
+  setupRoutes: function() {
+    var basePath = _.result(this, "basePath");
+
+    this.routes.get[basePath + '/logout'] = {
+      action: this.logout
+    };
+
+    BaseCrudController.prototype.setupRoutes.call(this);
+  },
+
   middleware: function() {
     return {
       create: [authenticateMiddleware, requireJsonMiddleware],
@@ -109,6 +119,12 @@ module.exports = BaseCrudController.extend({
   },
 
   update: function(req, res, next) {
+    next();
+  },
+
+  logout: function(req, res, next) {
+    req.session.access_token = undefined;
+    req.cookie.access_token = undefined;
     next();
   }
 });

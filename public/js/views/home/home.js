@@ -7,9 +7,12 @@ define(function(require) {
 
   // Acts as a layout for multiple backbone views
   return Woodhouse.View.extend({
+    initialize: function() {
+      this.bindWindowEvents();
+    },
     template: function(context) {
       return jade.render('home', _.extend(context, {
-        user: APP.user.toJSON()
+        user: APP.user && APP.user.toJSON()
       }));
     },
     onRender: function() {
@@ -19,21 +22,29 @@ define(function(require) {
       }).render().$el);
     },
     openEditorModal: function() {
-      if(APP.user) {
-        this.$el.find('.editor').html(new EditorView({
-          collection: this.collection.clone(),
-          paging: this.collection.paging
-        }).render().$el);
+      this.$el.find('.editor').html(new EditorView({
+        collection: this.collection.clone(),
+        paging: this.collection.paging
+      }).render().$el);
 
-        this.$el.find('.editor-modal').modal('show');
-      }
+      this.$el.find('.editor-modal').modal('show');
     },
     openLoginModal: function() {
-      if(APP.user) {
-        this.$el.find('.login').html(new LoginView().render().$el);
-        this.$el.find('.login-modal').modal('show');
-      }
+      this.$el.find('.login').html(new LoginView().render().$el);
+      this.$el.find('.login-modal').modal('show');
     },
+    logout: function() {
+      APP.user = undefined;
+      $.ajax('/v1/users/logout');
+      this.render();
+    },
+    bindWindowEvents: function() {
+      $(window).on(APP.EVENTS.USER_LOGIN, function(e, user) {
+        setTimeout(function() {
+          this.render();
+        }.bind(this), 500);
+      }.bind(this));
+    }
 
   });
 })
