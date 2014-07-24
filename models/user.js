@@ -51,7 +51,7 @@ module.exports = Base.extend({
     });
   },
 
-
+  // decrypts and sets the user_id
   decryptToken: function(string) {
     var json = crypto.decryptJSON(string);
     if(json.user_id) {

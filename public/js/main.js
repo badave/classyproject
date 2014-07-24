@@ -50,5 +50,18 @@ require([
   'app',
   'bootstrap'
   ], function(jquery, _, Backbone, jade, Woodhouse, App) {
-    new App;
+    var User = require('./models/user');
+    var user = new User({"_id": "me"});
+    var APP = require('./constants');
+
+    user.fetch({
+      success: function() {
+        APP.user = user;
+        new App;
+      },
+      error: function() {
+        new App;
+      }
+    })
+
 });

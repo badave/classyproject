@@ -8,7 +8,7 @@ var compression = require('compression');
 var lessMiddleware = require('less-middleware');
 var jadeBrowser = require('jade-browser');
 
-var _ = global._ = require('underscore');
+var _ = global._ = require('lodash');
 var config = global.config = require('./config');
 var Bootie = global.Bootie = require('bootie');
 var database = new Bootie.Database(config.database);

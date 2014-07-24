@@ -19,7 +19,7 @@ module.exports = BaseCrudController.extend({
       action: this.recommended,
       middleware: this.getRouteMiddleware('recommended')
     };
-    
+
   	BaseCrudController.prototype.setupRoutes.call(this);
   },
 
