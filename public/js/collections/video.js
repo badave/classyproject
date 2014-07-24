@@ -5,6 +5,10 @@ define(function(require) {
 	return Base.extend({
 		urlRoot: "/v1/videos",
 
-		model: Video
+		model: Video,
+
+		url: function() {
+			return this.urlRoot + "/recommended";
+		}
 	});
 });

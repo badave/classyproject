@@ -7,7 +7,6 @@ module.exports = function(req, res, next) {
 		req.session.access_token = req.cookie.access_token;
 	}
 
-
 	if(req.session.access_token) {
 		req.user = new User();
 		req.user.decryptToken(req.session.access_token);
