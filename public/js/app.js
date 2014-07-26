@@ -13,6 +13,7 @@ define(function(require) {
     },
     index: function() {
       var videos = new Videos();
+      videos.type = "recommended";
       videos.fetch({
         success: function() {
           $('body').html(new HomeView({

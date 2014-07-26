@@ -8,7 +8,11 @@ define(function(require) {
 		model: Video,
 
 		url: function() {
-			return this.urlRoot + "/recommended";
+			if(this.type) {
+				return this.urlRoot + '/' + this.type;
+			}
+
+			return this.urlRoot;
 		}
 	});
 });

@@ -25,7 +25,7 @@ module.exports = BaseCrudController.extend({
 
   middleware: function() {
     return {
-      create: [authenticateMiddleware, requireJsonMiddleware, requireUserMiddleware],
+      create: [authenticateMiddleware, requireJsonMiddleware],
       find: [authenticateMiddleware],
       recommended: [authenticateMiddleware],
       findOne: [authenticateMiddleware, requireUserMiddleware, requireAdminMiddleware],

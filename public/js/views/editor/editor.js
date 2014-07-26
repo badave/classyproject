@@ -30,6 +30,7 @@ define(function(require) {
     },
     addVideo: function(e) {
       this.collection.unshift(new Video());
+      this.$el.find('[name="tags"]').tagsinput();
     },
     playVideo: function(e) {
       // Player listens for this event on the collection
