@@ -5,6 +5,8 @@ define(function(require) {
 	var APP = require('../../constants');
 	var Video = require('../../models/video');
 	var Feel = require('../../models/feel');
+	var Feels =require('../../collections/feel');
+
 	require('videojs-youtube');
 
 	var HEIGHT_PERCENT = 0.75;
@@ -16,6 +18,27 @@ define(function(require) {
 			if(!this.model) {
 				this.model = new Video();
 			}
+
+			this.feels = new Feels();
+			this.feels.object_id = this.model.id;
+
+			this.feels.fetch({
+				success: function(feels) {
+					feels.each(function(feel) {
+						if(feel.get('feeling') === 'like') {
+							this.model.set('like', 'liked');
+							this.model.set('dislike', '');
+						}
+						if(feel.get('feeling') === 'dislike') {
+							this.model.set('like', '');
+							this.model.set('dislike', 'disliked');
+						}
+						if(feel.get('feeling') === 'save') {
+							this.model.set('saved', 'saved');
+						}
+					}.bind(this));
+				}.bind(this)
+			});
 
 			this.model.set('playing', true);
 			this.template.bind(this);

@@ -11,6 +11,8 @@ module.exports = Bootie.Model.extend({
     return {
       _id: null,
       user_id: null,
+      created: new Date().getTime(),
+      updated: new Date().getTime(),
       created_date: new Date(),
       updated_date: new Date()
     };

@@ -14,7 +14,7 @@ module.exports = BaseCrudController.extend({
   debug: false,
 
   // Available controller actions (see `setupRoutes` for more info)
-  crud: ["C", "R", "O", "D"],
+  crud: ["C", "R", "O"],
 
   create: function(req, res, next, options) {
     var model = this.setupModel(req);
@@ -30,10 +30,6 @@ module.exports = BaseCrudController.extend({
       _.merge(qo.query, options.query);
     }
 
-    if (this.debug) {
-      console.log("Find with Query: %s".verbose, JSON.stringify(qo));
-    }
-
     qo.query.type = model.get('type');
     qo.query.object_id = model.get('object_id');
     qo.query.feeling = model.get('feeling');
@@ -46,6 +42,10 @@ module.exports = BaseCrudController.extend({
       }, { 
         'feeling': 'dislike'
       }];
+    }
+
+    if (this.debug) {
+      console.log("Find with Query: %s".verbose, JSON.stringify(qo));
     }
 
     return collection.fetch(qo)
@@ -75,5 +75,44 @@ module.exports = BaseCrudController.extend({
       })
       .then(this.nextThen(req, res, next))
       .catch(this.nextCatch(req, res, next));
-  }
+  },
+
+  // CRUD functions
+  // ---
+
+  find: function(req, res, next, options) {
+    var qo = this.parseQueryString(req);
+    var collection = this.setupCollection(req, qo);
+
+    // Merge `options.query` with the query string query and filters
+    if (options && options.query) {
+      _.merge(qo.query, options.query);
+    }
+
+    if(req.query.object_id) {
+      qo.query.object_id = {
+        "$in": (req.query.object_id || '').split(',')
+      };
+    }
+
+    if (this.debug) {
+      console.log("Find with Query: %s".verbose, JSON.stringify(qo));
+    }
+
+    console.log(qo);
+
+    return collection.fetch(qo).bind(this).then(function(resp) {
+      return collection.count(qo).tap(function(resp) {
+        res.paging = {
+          total: parseInt(resp),
+          count: parseInt(collection.models.length),
+          limit: parseInt(qo.limit),
+          offset: parseInt(qo.skip),
+          has_more: parseInt(collection.models.length) < parseInt(resp)
+        };
+      });
+    }).then(function(count) {
+      return collection;
+    }).then(this.nextThen(req, res, next)).catch(this.nextCatch(req, res, next));
+  },
 });
