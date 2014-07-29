@@ -4,6 +4,7 @@ define(function(require) {
 
 	var APP = require('../../constants');
 	var Video = require('../../models/video');
+	var Feel = require('../../models/feel');
 	require('videojs-youtube');
 
 	var HEIGHT_PERCENT = 0.75;
@@ -101,15 +102,68 @@ define(function(require) {
 		like: function() {
 			this.model.set('like', 'liked');
 			this.model.set('dislike', '');
+
+			var feel = new Feel({
+				'object_id': this.model.id,
+				'type': 'video',
+				'score': 1,
+				'feeling': 'like'
+			});
+
+			feel.save({}, {
+				success: function() {
+					console.log("Success saving feelings");
+				},
+				error: function(e) {
+					console.log("Error saving feelings");
+				}
+			});
 		},
 
 		dislike: function() {
 			this.model.set('like', '');
 			this.model.set('dislike', 'disliked');
+
+
+			var feel = new Feel({
+				'object_id': this.model.id,
+				'type': 'video',
+				'score': -1,
+				'feeling': 'dislike'
+			});
+
+			feel.save({}, {
+				success: function() {
+					console.log("Success saving feelings");
+				},
+				error: function(e) {
+					console.log("Error saving feelings");
+				}
+			});
 		},
 
 		save: function() {
-			this.model.set('saved', 'saved');
+			if(this.model.get('saved')) {
+				this.model.set('saved', '');
+			} else {
+				this.model.set('saved', 'saved');
+			}
+
+			var feel = new Feel({
+				'object_id': this.model.id,
+				'type': 'video',
+				'score': 0,
+				'feeling': 'save'
+			});
+
+			feel.save({}, {
+				success: function() {
+					console.log("Success saving feelings");
+				},
+				error: function(e) {
+					console.log("Error saving feelings");
+				}
+			});
 		},
 
 		bindKeyboardEvents: function() {
