@@ -9,7 +9,7 @@ define(function(require) {
 
 		url: function() {
 			if(this.type) {
-				return this.urlRoot + '/' + this.type;
+				return this.urlRoot + '/' + this.type + "?sort=updated_date";
 			}
 
 			return this.urlRoot;

@@ -50,8 +50,7 @@ module.exports = BaseCrudController.extend({
     }
 
     delete qo.query.user_id;
-
-    console.log(qo);
+    
 
     return collection.fetch(qo).bind(this).then(function(resp) {
       return collection.count(qo).tap(function(resp) {
