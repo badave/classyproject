@@ -19,26 +19,7 @@ define(function(require) {
 				this.model = new Video();
 			}
 
-			this.feels = new Feels();
-			this.feels.object_id = this.model.id;
-
-			this.feels.fetch({
-				success: function(feels) {
-					feels.each(function(feel) {
-						if(feel.get('feeling') === 'like') {
-							this.model.set('like', 'liked');
-							this.model.set('dislike', '');
-						}
-						if(feel.get('feeling') === 'dislike') {
-							this.model.set('like', '');
-							this.model.set('dislike', 'disliked');
-						}
-						if(feel.get('feeling') === 'save') {
-							this.model.set('saved', 'saved');
-						}
-					}.bind(this));
-				}.bind(this)
-			});
+			this.updateFeels();
 
 			this.model.set('playing', true);
 			this.template.bind(this);
@@ -118,6 +99,7 @@ define(function(require) {
 			if(this.collection.length > 1) {
 				this.collection.shift();
 				this.model = this.collection.first();
+				this.updateFeels();
 				this.render();
 			}
 		},
@@ -186,6 +168,29 @@ define(function(require) {
 				error: function(e) {
 					console.log("Error saving feelings");
 				}
+			});
+		},
+
+		updateFeels: function() {
+			this.feels = new Feels();
+			this.feels.object_id = this.model.id;
+
+			this.feels.fetch({
+				success: function(feels) {
+					feels.each(function(feel) {
+						if(feel.get('feeling') === 'like') {
+							this.model.set('like', 'liked');
+							this.model.set('dislike', '');
+						}
+						if(feel.get('feeling') === 'dislike') {
+							this.model.set('like', '');
+							this.model.set('dislike', 'disliked');
+						}
+						if(feel.get('feeling') === 'save') {
+							this.model.set('saved', 'saved');
+						}
+					}.bind(this));
+				}.bind(this)
 			});
 		},
 
