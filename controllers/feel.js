@@ -99,8 +99,6 @@ module.exports = BaseCrudController.extend({
       console.log("Find with Query: %s".verbose, JSON.stringify(qo));
     }
 
-    console.log(qo);
-
     return collection.fetch(qo).bind(this).then(function(resp) {
       return collection.count(qo).tap(function(resp) {
         res.paging = {
