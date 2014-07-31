@@ -66,6 +66,7 @@ app.use(jadeBrowser('/js/templates.js', '**', {
 var FeelController = require('./controllers/feel');
 var VideoController = require('./controllers/video');
 var UserController = require('./controllers/user');
+var ChannelController = require('./controllers/channel');
 
 var router = new Bootie.Router({
   version: "v1",
@@ -77,6 +78,9 @@ var router = new Bootie.Router({
       db: database.mongodbs.primary
     }),
     feel: new FeelController({
+      db: database.mongodbs.primary
+    }),
+    channel: new ChannelController({
       db: database.mongodbs.primary
     })
   }

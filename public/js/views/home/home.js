@@ -1,13 +1,17 @@
 define(function(require) {
   var Woodhouse = require('woodhouse');
+
   var PlayerView = require('../video/player');
   var EditorView = require('../editor/editor');
   var LoginView = require('../user/login');
+  var ChannelView = require('../channels/channel');
   var APP = require('../../constants');
 
   // Acts as a layout for multiple backbone views
   return Woodhouse.View.extend({
-    initialize: function() {
+    initialize: function(options) {
+      this.videos = options.videos;
+      this.channels = options.channels;
       this.bindWindowEvents();
     },
     template: function(context) {
@@ -16,15 +20,19 @@ define(function(require) {
       }));
     },
     onRender: function() {
+      this.$el.find('.channels-container').html(new ChannelView({
+        collection: this.channels
+      }).render().$el);
+
       this.$el.find('.player-container').html(new PlayerView({
-        collection: this.collection.clone(),
-        paging: this.collection.paging
+        collection: this.videos.clone(),
+        paging: this.videos.paging
       }).render().$el);
     },
     openEditorModal: function() {
       this.$el.find('.editor').html(new EditorView({
-        collection: this.collection.clone(),
-        paging: this.collection.paging
+        collection: this.videos.clone(),
+        paging: this.videos.paging
       }).render().$el);
 
       this.$el.find('.editor-modal').modal('show');

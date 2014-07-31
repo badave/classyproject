@@ -1,0 +1,5 @@
+.channel-list(bind-each="this", bind-each-context="collection")
+	.channel
+		span.channel-title(bind-text="title")
+		span.remove-channel(bind-click="destroy")
+			i.fa.fa-times 
