@@ -56,9 +56,7 @@ define(function(require) {
         var tags = this.$el.find('[data-tags-id="' + model.id + '"]').val();
 
         model.set('tags', (tags || '').split(','));
-        if(!_.isEmpty(model.changed)) {
-            model.save();
-        }
+        model.save();
       }.bind(this));
     },
     goToPage: function(e) {

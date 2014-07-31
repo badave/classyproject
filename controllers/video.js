@@ -34,6 +34,11 @@ module.exports = BaseCrudController.extend({
     };
   },
 
+  update: function(req, res, next) {
+    console.log(req.body);
+    return BaseCrudController.prototype.update.apply(this, arguments);
+  },
+
 
   // Recommended is simply all videos that aren't your videos
   recommended: function(req, res, next, options) {
