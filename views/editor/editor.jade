@@ -16,7 +16,7 @@ div.editor-modal.modal.fade(tabindex="-1", role="dialog", aria-hidden="true")
             td Description
             td Tags
             td(style="width:20px")
-              a.addVideo(href="javascript:;")
+              a.addVideo(href="javascript:;",bind-click="addVideo")
                 i.fa.fa-plus
           tbody(bind-each="this", bind-each-context="collection")
             tr
@@ -31,10 +31,10 @@ div.editor-modal.modal.fade(tabindex="-1", role="dialog", aria-hidden="true")
               td
                 input(name="tags", bind-val="tags", type="text", value="",bind-attr-data-tags-id="_id")
               td.icons
-                a.removeVideo(href="javascript:;",bind-attr-data-id="_id")
+                a.removeVideo(href="javascript:;",bind-click="removeVideo")
                   i.fa.fa-minus
                 &nbsp;
-                a.playVideo(href="javascript:;",bind-attr-data-id="_id")
+                a.playVideo(href="javascript:;",bind-click="playVideo")
                   i.fa.fa-play
         include pagination
       .modal-footer

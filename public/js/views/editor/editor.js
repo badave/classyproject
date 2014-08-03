@@ -7,9 +7,6 @@ define(function(require) {
   return Woodhouse.View.extend({
     tagName: 'form',
     events: {
-        'click .addVideo': 'addVideo',
-        'click .playVideo': 'playVideo',
-        'click .removeVideo': 'removeVideo',
         'submit': 'save'
     },
     initialize: function(options) {
@@ -32,21 +29,11 @@ define(function(require) {
       this.collection.unshift(new Video());
       this.$el.find('[name="tags"]').tagsinput();
     },
-    playVideo: function(e) {
-      // Player listens for this event on the collection
-      var target_id = $(e.currentTarget).attr('data-id');
-      var model = this.collection.findWhere({
-        '_id': target_id
-      });
-      $(window).trigger(APP.EVENTS.LOAD_VIDEO, model);
+    playVideo: function(e, options) {
+      $(window).trigger(APP.EVENTS.LOAD_VIDEO, options.model);
     },
-    removeVideo: function(e) {
-      var target_id = $(e.currentTarget).attr('data-id');
-      var model = this.collection.findWhere({
-        '_id': target_id
-      });
-
-      model.destroy();
+    removeVideo: function(e, options) {
+      options.model.destroy();
     },
     save: function(e) {
       e.stopPropagation();
