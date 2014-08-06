@@ -1,5 +1,5 @@
 .channel-list(bind-each="this", bind-each-context="collection")
 	.channel
-		span.channel-title(bind-text="title")
-		span.remove-channel(bind-click="destroy")
+		a.channel-title(bind-text="title",href="javascript:;",bind-click="loadChannel")
+		span.remove-channel(bind-click="destroy",bind-visible="removeable")
 			i.fa.fa-times 

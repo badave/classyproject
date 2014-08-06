@@ -6,6 +6,31 @@ define(function(require) {
   var Channels =require('./collections/channel');
   var HomeView = require('./views/home/home');
 
+
+  var CHANNELS = [{
+    title: "Recommended",
+    tags: []
+  }, {
+    title: "Awww",
+    tags: ["awww", "cute","dog","cat"]
+  }, {
+    title: "Funny",
+    tags: ["hilarious", "cute", "humorous", "haha", "lol"]
+  }, {
+    title: "GIF",
+    tags: ["cute","dog","cat"],
+    type: "image"
+  }, {
+    title: "Beautify",
+    tags: ["makeup", "lipstick", "eye liner"]
+  }, {
+    title: "Workout",
+    tags: ["workout", "fitness"]
+  }, {
+    title: "TIL",
+    tags: ["learn", "how to"]
+  }];
+
   var App = Woodhouse.Router.extend({
     initialize: function() {
       Backbone.history.start();
@@ -28,11 +53,15 @@ define(function(require) {
 
 
       fns.push(new Promise(function(successCallback, errorCallback) {
-        var channels = new Channels();
-        channels.fetch({
-          success: successCallback,
-          error: errorCallback
-        });
+        var channels = new Channels(CHANNELS);
+
+        successCallback(channels);
+
+
+        // channels.fetch({
+        //   success: successCallback,
+        //   error: errorCallback
+        // });
       }));
 
       return Promise.all(fns)

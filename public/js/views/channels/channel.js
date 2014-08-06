@@ -22,6 +22,14 @@ define(function(require) {
 	  		this.render();
 	  	}
   	},
+    loadChannel: function(e, options) {
+      var model = options.model;
+
+      var tags = model.get('tags');
+      console.log(tags);
+
+    },
+
   	destroy: function(e, options) {
   		var destroyMe = confirm("Are you sure you want to remove this station?");
   		if(destroyMe) {
