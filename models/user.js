@@ -39,7 +39,7 @@ module.exports = Base.extend({
   },
 
   admin: function() {
-    return false;
+    return true;
   },
 
   generateToken: function() {
