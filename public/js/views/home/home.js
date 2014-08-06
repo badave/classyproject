@@ -20,15 +20,23 @@ define(function(require) {
       }));
     },
     onRender: function() {
+      this.attachChannels();
+      this.attachPlayer();
+    },
+
+    attachChannels: function() {
       this.$el.find('.channels-container').html(new ChannelView({
         collection: this.channels
       }).render().$el);
+    },
 
+    attachPlayer: function() {
       this.$el.find('.player-container').html(new PlayerView({
         collection: this.videos.clone(),
         paging: this.videos.paging
       }).render().$el);
     },
+
     openEditorModal: function() {
       this.$el.find('.editor').html(new EditorView({
         collection: this.videos.clone(),
@@ -51,6 +59,15 @@ define(function(require) {
         setTimeout(function() {
           this.render();
         }.bind(this), 500);
+      }.bind(this));
+
+      $(window).on(APP.EVENTS.LOAD_CHANNEL, function(e, channel) {
+        var title = channel.get('title');
+        var tags = channel.get('tags') || [];
+        tags.push(title);
+        this.videos.tags = tags;
+        this.videos.fetch({reset: true});
+        this.attachPlayer();
       }.bind(this));
     }
 

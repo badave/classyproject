@@ -23,11 +23,7 @@ define(function(require) {
 	  	}
   	},
     loadChannel: function(e, options) {
-      var model = options.model;
-
-      var tags = model.get('tags');
-      console.log(tags);
-
+      $(window).trigger(APP.EVENTS.LOAD_CHANNEL, options.model);
     },
 
   	destroy: function(e, options) {

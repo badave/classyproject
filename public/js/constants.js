@@ -3,7 +3,8 @@ define(function(require) {
 		EVENTS: {
 			LOAD_VIDEO: 'video:load',
 			PAUSE_VIDEO: 'video:pause',
-			USER_LOGIN: 'user:login'
+			USER_LOGIN: 'user:login',
+			LOAD_CHANNEL: 'channel:load'
 		}
 	};
 });

@@ -8,11 +8,23 @@ define(function(require) {
 		model: Video,
 
 		url: function() {
+			var url = this.urlRoot;
+
+			var params = [];
+			
 			if(this.type) {
-				return this.urlRoot + '/' + this.type + "?sort=updated_date";
+				url += '/' + this.type;
 			}
 
-			return this.urlRoot;
+			if(this.tags && _.isArray(this.tags)) {
+				params.push("tags=" + this.tags.join(','));
+			}
+
+			params.push("sort=updated_date");
+
+			url += "?" + params.join("&");
+
+			return url;
 		}
 	});
 });
