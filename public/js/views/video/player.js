@@ -13,7 +13,9 @@ define(function(require) {
 
 	return Woodhouse.View.extend({
 		initialize: function() {
+			this.collection_clone = this.collection.clone();
 			this.model = this.collection.first();
+			this.paging = this.collection.paging;
 
 			if(!this.model) {
 				this.model = new Video();
@@ -96,9 +98,9 @@ define(function(require) {
 		},
 
 		next: function() {	
-			if(this.collection.length > 1) {
-				this.collection.shift();
-				this.model = this.collection.first();
+			if(this.collection_clone.length > 1) {
+				this.collection_clone.shift();
+				this.model = this.collection_clone.first();
 				this.updateFeels();
 				this.render();
 			}
@@ -239,6 +241,14 @@ define(function(require) {
 				this.model = model;
 				this.render();
 			}.bind(this));
+
+			$(window).on(APP.EVENTS.LOAD_VIDEOS, function(e, collection) {
+				this.collection = collection;
+				this.collection_clone = collection.clone();
+				this.model = this.collection_clone.first();
+				this.render();
+			}.bind(this));
+
 
 			$(window).on(APP.EVENTS.PAUSE_VIDEO, function(e) {
 				this.pause();

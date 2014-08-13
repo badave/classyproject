@@ -31,16 +31,16 @@ define(function(require) {
     },
 
     attachPlayer: function() {
-      this.$el.find('.player-container').html(new PlayerView({
-        collection: this.videos.clone(),
-        paging: this.videos.paging
-      }).render().$el);
+      this.playerView = new PlayerView({
+        collection: this.videos
+      });
+
+      this.$el.find('.player-container').html(this.playerView.render().$el);
     },
 
     openEditorModal: function() {
       this.$el.find('.editor').html(new EditorView({
-        collection: this.videos.clone(),
-        paging: this.videos.paging
+        collection: this.videos
       }).render().$el);
 
       this.$el.find('.editor-modal').modal('show');
@@ -66,8 +66,9 @@ define(function(require) {
         var tags = channel.get('tags') || [];
         tags.push(title);
         this.videos.tags = tags;
-        this.videos.fetch({reset: true});
-        this.attachPlayer();
+        this.videos.fetch({reset: true, success: function() {
+          $(window).trigger(APP.EVENTS.LOAD_VIDEOS, this.videos);
+        }.bind(this)});
       }.bind(this));
     }
 

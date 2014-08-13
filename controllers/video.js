@@ -56,12 +56,17 @@ module.exports = BaseCrudController.extend({
 
     delete qo.query.user_id;
 
-    if(req.params.tags) {
-      var tags = req.params.tags.split(',');
+    if(req.query.tags) {
+      var tags = _.map(req.query.tags.split(','), function(tag) {
+        return tag.toLowerCase();
+      });
+
       qo.query.tags = {
         '$in': tags
       };
     }
+
+    console.log(qo.query);
     
     return collection.fetch(qo).bind(this).then(function(resp) {
       return collection.count(qo).tap(function(resp) {

@@ -11,7 +11,7 @@ define(function(require) {
     },
     initialize: function(options) {
       this.collection = options.collection;
-      this.paging = options.paging;
+      this.paging = options.collection.paging;
     },
     templateContext: function() {
       return _.extend(Woodhouse.View.prototype.templateContext.apply(this, arguments), {
